@@ -1,15 +1,14 @@
+import { styled } from "styled-components";
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Form from '../components/Form';
-import { styled } from "styled-components";
 
-const FormWrapper = styled.div`
+const FormSectionWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
     margin-top: 70px;
-
 `;
 
 const TitleWrapper = styled.div`
@@ -28,17 +27,42 @@ const TitleWrapper = styled.div`
 const NovoVideo = () => {
     return (
         <>
-        <Header dark/>
+        <Header dark />
         
-        <FormWrapper>
+        <FormSectionWrapper>
             <TitleWrapper>
                 <h1>Novo Vídeo</h1>
                 <p>Complete o formulário para criar um novo card de vídeo.</p>
             </TitleWrapper>
 
-            
-            <Form />  
-        </FormWrapper>
+            <Form
+                title="Criar Card"
+                formStyles={{
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr',
+                    flexWrap: 'wrap',
+                    gap: '60px'
+                }}
+                headingWrapperStyles={`
+                    grid-column: span 2;
+                    display: flex;
+                    align-items: center;
+                    margin-top: 47px;
+                    border-top: 1px solid #FFF;
+                    border-bottom: 1px solid #FFF;
+                    height: 91px;
+                `}
+                headingStyles={`
+                    width: 100%;
+                    color: #FFF;
+                    font-size: 36px;
+                    font-weight: 600;
+                `}
+                buttonWrapperStyles={`
+                    width: 473px;
+                `}
+            />
+        </FormSectionWrapper>
         
         <Footer />
         </>        
