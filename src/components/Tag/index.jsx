@@ -26,8 +26,6 @@ const StyledTag = styled.h1 `
 `;
 
 const Tag = ({ children, category }) => {
-    // const category = useCategory();
-
     return (
         <StyledTag $category={category}>{children}</StyledTag>
     )

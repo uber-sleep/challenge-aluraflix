@@ -9,51 +9,46 @@ const VideoSectionWrapper = styled.section`
     gap: 93px;
     width: 100%;
     margin-top: -29px;
-    div.videos {
+    div.row {
         display: flex;
         flex-direction: column;
         gap: 40px;
         height: 100%;
     }
-    div.row {
+    div.videos {
         display: flex;
         gap: 30px;
         width: 100%; 
     }
 `;
 
-const VideoSection = () => {
-    return (
-        <>
-        <VideoSectionWrapper>
-            <div className="videos">
-                <Tag category="frontend">Front End</Tag>
-                <div className="row">
-                    <VideoCard />
-                    <VideoCard />
-                    <VideoCard />
-                </div>    
-            </div>
-            <div className="videos">
-                <Tag category="backend">Back End</Tag>
-                <div className="row">
-                    <VideoCard />
-                    <VideoCard />
-                    <VideoCard />
-                </div>    
-            </div>
-            <div className="videos">
-                <Tag category="mobile">Mobile</Tag>
-                <div className="row">
-                    <VideoCard />
-                    <VideoCard />
-                    <VideoCard />
-                </div>    
-            </div>
-        </VideoSectionWrapper>
+const VideoSection = ({ categories }) => {
+    const sections = [
+        { category: "frontend", title: "Front End" },
+        { category: "backend", title: "Back End" },
+        { category: "mobile", title: "Mobile" }
+    ];
 
-        </>
-    )
+    const renderSection = ({ category, title }) => (
+        <div className="row" key={category}>
+            <Tag category={category}>{title}</Tag>
+            <div className="videos">
+                {categories.filter((video) => video.subject === category).map(video => 
+                    <VideoCard 
+                        key={video.id} 
+                        imageUrl={video.img} 
+                        altText={video.description} 
+                    />
+                )}
+            </div>  
+        </div>
+    );
+
+    return (
+        <VideoSectionWrapper>
+            {sections.map(renderSection)}
+        </VideoSectionWrapper>
+    );
 };
 
 export default VideoSection;

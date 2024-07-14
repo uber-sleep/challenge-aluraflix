@@ -1,7 +1,8 @@
-
 import { FaTrash } from "react-icons/fa";
 import { FaPencilAlt } from "react-icons/fa";
 import { styled } from "styled-components";
+import Modal from "../Modal";
+import { useState } from "react";
 
 const VideoCardWrapper = styled.figure`
     display: flex;
@@ -41,15 +42,20 @@ const VideoCardWrapper = styled.figure`
     }
 `;
 
-const VideoCard = () => {
+const VideoCard = ({ imageUrl, altText }) => {
+    const [modalOpen, setModalOpen ] = useState(false);
     return(
-        <VideoCardWrapper>
-            <img src="https://i0.wp.com/picjumbo.com/wp-content/uploads/pure-nature-landscape-single-tree-in-green-field-free-photo.jpg?w=600&quality=80" alt="Elephant at sunset" />
-            <figcaption>
-                <button><FaTrash />Deletar</button>
-                <button><FaPencilAlt />Editar</button>
-            </figcaption>
-        </VideoCardWrapper>
+        <>
+            <VideoCardWrapper>
+                <img src={imageUrl} alt={altText} />
+                <figcaption>
+                    <button><FaTrash />Deletar</button>
+                    <button onClick={() => setModalOpen(true)}><FaPencilAlt />Editar</button>
+                </figcaption>
+            </VideoCardWrapper>
+        
+            {modalOpen && <Modal setModalOpen={setModalOpen} />}
+        </>
     )
 }
 
