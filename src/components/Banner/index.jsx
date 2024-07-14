@@ -1,74 +1,74 @@
 import { styled } from "styled-components";
 
-const StyledBanner = styled.div`
-    height: 832px;
-    top: 102px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 18, 51, 0.56); 
+const BannerWrapper = styled.div`
     display: flex;
     align-items: center;
+    justify-content: center;
+    height: 100vh;  
+    background-color: rgba(0, 18, 51, 0.56); 
+    z-index: -1;
+    padding-bottom: 150px;
     img {
         width: 100%;
-        height: 744px;
-        position: relative;
+        height: auto;  
     }
 `;
 
-const StyledCard = styled.div`
+const BannerCard = styled.div`
     display: flex;
     justify-content: space-around;
     position: absolute;
+    max-width: 80%;
+    margin: 0 auto;
 `;
 
-const StyledWrapper = styled.div`
+const BannerCardText = styled.div`
     max-width: 50%;
+    h1, h2, p {
+        color: #FFF;
+    }
     h1 {
         font-size: 48px;
         font-weight: 700;
         padding: 24px;
         background-color: #6BD1FF;
-        color: #FFF;
         border-radius: 15px;
         max-width: fit-content;    
         margin-bottom: 40px;
         text-transform: uppercase;
-}
-    h2{
+    }
+    h2 {
         font-size: 46px;
         margin-bottom: 10px;
-        color: #FFF;
     }
     p {
         font-size: 18px;
         font-weight: 300;
-        color: #FFF;
     }
-
 `;
 
-const Banner = () => {
+const Banner = ({ title, subtitle, description, videoUrl, imageUrl }) => {
     return (
-        <>
-        <StyledBanner>
-            <img src="src/assets/player.png" />
-            <StyledCard>
-               <StyledWrapper>
-                    <h1>Front End</h1>
-
-                    <h2>SEO com React</h2>
-                    
-                    <p>Eu to aqui pra nesse vídeo dizer que a gente vai aprender a começar uma app inspirada no desenho Pokémon com Nextjs e React, ver algumas dicas sobre performance e de quebra conhecer uma plataforma sensacional pra fazer deploy que é a Vercel. Tudo em 22 minutos nesse vídeo feito com todo o carinho do mundo construindo uma "Pokedex"!</p>
-                </StyledWrapper> 
-                
-                <iframe width="420" height="315"
-                src="https://www.youtube.com/embed/c8mVlakBESE?si=_wCBnGHoc-BmpjMO">
-                </iframe>
-            </StyledCard>
-        </StyledBanner>
-        </>
-    )
+        <BannerWrapper>
+            <img src={imageUrl} alt="Banner Image" />
+            <BannerCard>
+                <BannerCardText>
+                    <h1>{title}</h1>
+                    <h2>{subtitle}</h2>
+                    <p>{description}</p>
+                </BannerCardText>
+                <iframe 
+                    width="420" 
+                    height="315"
+                    src={videoUrl}
+                    title="YouTube video"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                ></iframe>
+            </BannerCard>
+        </BannerWrapper>
+    );
 };
 
 export default Banner;
