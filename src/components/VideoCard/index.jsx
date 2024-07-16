@@ -1,8 +1,8 @@
-import { FaTrash } from "react-icons/fa";
-import { FaPencilAlt } from "react-icons/fa";
+import { FaTrash, FaPencilAlt } from "react-icons/fa";
 import { styled } from "styled-components";
 import Modal from "../Modal";
 import { useState } from "react";
+import { useVideo } from "../../context/VideoContext";
 
 const VideoCardWrapper = styled.figure`
     display: flex;
@@ -42,21 +42,45 @@ const VideoCardWrapper = styled.figure`
     }
 `;
 
-const VideoCard = ({ imageUrl, altText }) => {
+const VideoCard = ({ imageUrl, altText, video }) => {
     const [modalOpen, setModalOpen ] = useState(false);
-    return(
+    const { deleteVideo } = useVideo();
+
+    const handleDelete = async () => {
+        try {
+            const response = await fetch(`http://localhost:3000/list/${video.id}`, {
+                method: 'DELETE'
+            });
+
+            if (!response.ok) {
+                throw new Error('Erro ao deletar o vídeo');
+            }
+
+            deleteVideo(video.id);
+
+            console.log('Vídeo deletado com sucesso');
+        } catch (error) {
+            console.error('Erro ao deletar o vídeo:', error);
+        }
+    };
+
+    const handleEdit = () => {
+        setModalOpen(true); 
+    };
+
+    return (
         <>
             <VideoCardWrapper>
                 <img src={imageUrl} alt={altText} />
                 <figcaption>
-                    <button><FaTrash />Deletar</button>
-                    <button onClick={() => setModalOpen(true)}><FaPencilAlt />Editar</button>
+                    <button onClick={handleDelete}><FaTrash />Deletar</button>
+                    <button onClick={handleEdit}><FaPencilAlt />Editar</button>
                 </figcaption>
             </VideoCardWrapper>
         
-            {modalOpen && <Modal setModalOpen={setModalOpen} />}
+            {modalOpen && <Modal setModalOpen={setModalOpen} videoData={video} />} 
         </>
-    )
-}
+    );
+};
 
 export default VideoCard;

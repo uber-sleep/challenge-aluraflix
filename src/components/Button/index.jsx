@@ -16,10 +16,16 @@ const StyledButton = styled.button`
     cursor: pointer;
 `;
 
-const Button = ({ children, highlight = false }) => {
-    return(
-        <StyledButton $highlight={highlight}>{children}</StyledButton>
-    )
-}
+const Button = ({ type, children, highlight = false, onClick }) => {
+    return (
+      <StyledButton 
+        type={type} 
+        $highlight={highlight} 
+        onClick={onClick}
+      >
+        {children}
+      </StyledButton>
+    );
+  };
 
 export default Button;

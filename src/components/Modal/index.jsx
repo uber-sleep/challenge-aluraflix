@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import Form from "../Form";
+import { useState, useEffect } from "react";
 
 const ModalOverlay = styled.div`
     position: fixed;
@@ -40,15 +41,74 @@ const ModalWrapper = styled.div`
     }
 `;
 
-const Modal = ({ setModalOpen }) => {
+const Modal = ({ setModalOpen, videoData }) => {
+    const [title, setTitle] = useState(videoData.title || '');
+    const [category, setCategory] = useState(videoData.category || '');
+    const [image, setImage] = useState(videoData.image || '');
+    const [video, setVideo] = useState(videoData.video || '');
+    const [description, setDescription] = useState(videoData.description || '');
+
+    useEffect(() => {
+        setTitle(videoData.title || '');
+        setCategory(videoData.category || '');
+        setImage(videoData.image || '');
+        setVideo(videoData.video || '');
+        setDescription(videoData.description || '');
+    }, [videoData]);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const formData = {
+            title,
+            category,
+            image,
+            video,
+            description
+        };
+    
+        try {
+            const response = await fetch(`http://localhost:3000/list/${videoData.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+    
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error('Erro na requisição:', errorData);
+                throw new Error(`Erro na requisição: ${response.statusText}`);
+            }
+    
+            const data = await response.json();
+            console.log('Resposta da API:', data);
+    
+            setModalOpen(false);
+
+            window.location.reload();
+        } catch (error) {
+            console.error('Erro ao enviar os dados:', error);
+        }
+    };
+
     return (
         <ModalOverlay>
             <ModalWrapper>
-                <button className="close" onClick={() => setModalOpen(false)}>
+                <button 
+                    className="close" 
+                    onClick={() => setModalOpen(false)}
+                >
                     <IoMdCloseCircleOutline size={30} />
                 </button>
                 <Form
-                    title="Editar card:"
+                    initialData={{ title, category, image, video, description }}
+                    setTitle={setTitle}
+                    setCategory={setCategory}
+                    setImage={setImage}
+                    setVideo={setVideo}
+                    setDescription={setDescription}
+                    titleName="Editar Vídeo:"
                     formStyles={{
                         flexDirection: 'column',
                         alignItems: 'center',
@@ -73,6 +133,7 @@ const Modal = ({ setModalOpen }) => {
                         width: 100%;
                     `}
                     isEdit
+                    onSubmit={handleSubmit}
                 />
             </ModalWrapper>
         </ModalOverlay>

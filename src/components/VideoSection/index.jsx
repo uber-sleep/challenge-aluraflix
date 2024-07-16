@@ -1,6 +1,7 @@
-import Tag from "../Tag";
-import VideoCard from "../VideoCard";
-import { styled } from "styled-components"; 
+import VideoCard from '../VideoCard';
+import Tag from '../Tag';
+import styled from 'styled-components';
+import { useVideo } from '../../context/VideoContext';
 
 const VideoSectionWrapper = styled.section`
     display: flex;
@@ -22,33 +23,52 @@ const VideoSectionWrapper = styled.section`
     }
 `;
 
-const VideoSection = ({ categories }) => {
-    const sections = [
-        { category: "frontend", title: "Front End" },
-        { category: "backend", title: "Back End" },
-        { category: "mobile", title: "Mobile" }
-    ];
+const VideoSection = () => {
+  const { filteredVideos } = useVideo();
 
-    const renderSection = ({ category, title }) => (
-        <div className="row" key={category}>
-            <Tag category={category}>{title}</Tag>
-            <div className="videos">
-                {categories.filter((video) => video.subject === category).map(video => 
-                    <VideoCard 
-                        key={video.id} 
-                        imageUrl={video.img} 
-                        altText={video.description} 
-                    />
-                )}
-            </div>  
-        </div>
-    );
-
-    return (
-        <VideoSectionWrapper>
-            {sections.map(renderSection)}
-        </VideoSectionWrapper>
-    );
+  return (    
+      <VideoSectionWrapper>
+          <div className="row">
+              <Tag category="frontend">Front End</Tag>
+              <div className="videos">
+                  {filteredVideos.frontend.map(video => (
+                      <VideoCard 
+                          key={video.id}
+                          imageUrl={video.image}
+                          altText={video.description}
+                          video={video}
+                      />
+                  ))}
+              </div>
+          </div>        
+          <div className="row">
+              <Tag category="backend">Back End</Tag>
+              <div className="videos">
+                  {filteredVideos.backend.map(video => (
+                      <VideoCard 
+                          key={video.id}
+                          imageUrl={video.image}
+                          altText={video.description}
+                          video={video}
+                      />
+                  ))}
+              </div>
+          </div>        
+          <div className="row">
+              <Tag category="mobile">Mobile</Tag>
+              <div className="videos">
+                  {filteredVideos.mobile.map(video => (
+                      <VideoCard 
+                          key={video.id}
+                          imageUrl={video.image}
+                          altText={video.description}
+                          video={video}
+                      />
+                  ))}
+              </div>
+          </div>        
+      </VideoSectionWrapper>
+  );
 };
 
 export default VideoSection;

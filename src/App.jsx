@@ -1,19 +1,22 @@
-import './App.css'
-import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import NovoVideo from './pages/NovoVideo';
+import NovoVideo from "./pages/NovoVideo";
+import GlobalStyles from "./components/GlobalStyles";
+import { VideoProvider } from './context/VideoContext';
 
 function App() {
 
   return (
       <BrowserRouter>
-            <Routes>
-              <Route index element={<Home />} />
-              <Route path='/novovideo' index element={<NovoVideo />} />
-            </Routes>
+        <VideoProvider>
+          <GlobalStyles />
+              <Routes>
+                    <Route index element={<Home />} />
+                    <Route path='/novovideo' index element={<NovoVideo />} />
+              </Routes>
+        </VideoProvider>
       </BrowserRouter>
   )
 }
 
-export default App
+export default App;

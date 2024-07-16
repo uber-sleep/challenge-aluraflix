@@ -30,23 +30,95 @@ const Heading = styled.h2`
     ${(props) => props.styles}
 `;
 
-const Form = ({ title, isEdit, onSubmit, formStyles, headingWrapperStyles, headingStyles, buttonWrapperStyles }) => {
-    return (
-        <FormWrapper {...formStyles} onSubmit={onSubmit}>
-            <HeadingWrapper styles={headingWrapperStyles}>
-                <Heading styles={headingStyles}>{title}</Heading>
-            </HeadingWrapper>
-            <Input label="Título" placeholder="Digite o título" isEdit={isEdit} />
-            <SelectComponent label="Categoria" placeholder="Selecione a categoria" isEdit={isEdit} />
-            <Input label="Imagem" placeholder="Insira o endereço da imagem" isEdit={isEdit} />
-            <Input label="Vídeo" placeholder="Insira o endereço do vídeo" isEdit={isEdit} />
-            <TextareaComponent label="Descrição" placeholder="Digite a descrição" isEdit={isEdit} />
-            <div className="button-wrapper">
-                <Button highlight>Guardar</Button>
-                <Button>Limpar</Button>
-            </div>
-        </FormWrapper>
-    );
+const Form = ({ initialData, setTitle, setCategory, setImage, setVideo, setDescription, titleName, formStyles, headingWrapperStyles, headingStyles, isEdit, onSubmit }) => {
+  const handleChange = (e) => {
+      const { name, value } = e.target;
+
+      switch (name) {
+          case 'title':
+              setTitle(value);
+              break;
+          case 'category':
+              setCategory(value);
+              break;
+          case 'image':
+              setImage(value);
+              break;
+          case 'video':
+              setVideo(value);
+              break;
+          case 'description':
+              setDescription(value);
+              break;
+          default:
+              break;
+      }
+  };
+
+  return (
+      <FormWrapper 
+          onSubmit={onSubmit} 
+          style={formStyles}
+      >
+          <HeadingWrapper styles={headingWrapperStyles}>
+              <Heading styles={headingStyles}>{titleName}</Heading>
+          </HeadingWrapper> 
+          
+          <Input 
+              type="text"
+              name="title"
+              value={initialData.title}
+              onChange={handleChange}
+              label="Título" 
+              placeholder="Digite o título" 
+              isEdit={isEdit} 
+          />
+          <SelectComponent 
+              name="category"
+              value={initialData.category}
+              onChange={handleChange}
+              label="Categoria" 
+              isEdit={isEdit} 
+          />
+          <Input 
+              type="text"
+              name="image"
+              value={initialData.image}
+              onChange={handleChange}
+              label="Imagem" 
+              placeholder="Insira o endereço da imagem" 
+              isEdit={isEdit} 
+          />
+          <Input 
+              type="text"
+              name="video"
+              value={initialData.video}
+              onChange={handleChange}
+              label="Vídeo" 
+              placeholder="Insira o endereço do vídeo" 
+              isEdit={isEdit} 
+          />
+          <TextareaComponent 
+              name="description"
+              value={initialData.description}
+              onChange={handleChange}
+              label="Descrição" 
+              placeholder="Digite a descrição do vídeo"         
+              isEdit={isEdit} 
+          />
+          
+          <div className="button-wrapper">
+              <Button type="submit" highlight>Guardar</Button>
+              <Button type="button" onClick={() => {
+                  setTitle('');
+                  setCategory('');
+                  setImage('');
+                  setVideo('');
+                  setDescription('');
+              }}>Limpar</Button>
+          </div>
+      </FormWrapper>
+  );
 };
 
 export default Form;

@@ -18,7 +18,10 @@ const FooterWrapper = styled.footer`
 const Footer = () => {
     return (
         <FooterWrapper>
-            <img src={logo} alt="Logo" />
+            <img 
+                src={logo} 
+                alt="Logo" 
+            />
         </FooterWrapper>
     );
 };

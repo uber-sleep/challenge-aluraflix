@@ -1,4 +1,3 @@
-// import { useCategory } from "../../context/CategoryContext";
 import {styled} from "styled-components";
 
 const StyledTag = styled.h1 `

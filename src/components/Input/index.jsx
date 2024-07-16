@@ -42,27 +42,49 @@ const Select = styled(BaseInput).attrs({ as: 'select' })`
   height: 62px;
 `;
 
-const Input = ({ label, placeholder, isEdit }) => (
+const Input = ({ label, type, name, value, onChange, placeholder, isEdit}) => (
   <InputWrapper>
     <label>{label}</label>
-    <BaseInput placeholder={placeholder} $isEdit={isEdit}/>
+    <BaseInput 
+      type={type} 
+      name={name} 
+      value={value} 
+      onChange={onChange} 
+      placeholder={placeholder}
+      $isEdit={isEdit}
+      required
+    />
   </InputWrapper>
 );
 
-const TextareaComponent = ({ label, placeholder, isEdit }) => (
+const TextareaComponent = ({ label, name, value, onChange, placeholder, isEdit }) => (
   <InputWrapper>
     <label>{label}</label>
-    <Textarea placeholder={placeholder} $isEdit={isEdit}/>
+    <Textarea 
+      name={name} 
+      value={value} 
+      onChange={onChange} 
+      placeholder={placeholder}
+      $isEdit={isEdit}
+      required
+    />
   </InputWrapper>
 );
 
-const SelectComponent = ({ label, isEdit }) => (
+const SelectComponent = ({ label, name, value, onChange, placeholder, isEdit }) => (
   <InputWrapper> 
     <label>{label}</label>
-    <Select $isEdit={isEdit}>
-      <option value="">Selecione uma opção</option>
-      <option value="option1">Opção 1</option>
-      <option value="option2">Opção 2</option>
+    <Select 
+      name={name} 
+      value={value} 
+      onChange={onChange} 
+      placeholder={placeholder}
+      $isEdit={isEdit}
+    >
+      <option value="" selected disabled hidden>Ver opções:</option>
+      <option value="frontend">Front End</option>
+      <option value="backend">Back End</option>
+      <option value="mobile">Mobile</option>
     </Select>
   </InputWrapper>
 );

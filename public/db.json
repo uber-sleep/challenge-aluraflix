@@ -1,0 +1,76 @@
+{
+  "list": [
+    {
+      "title": "O que faz uma desenvolvedora front-end",
+      "category": "frontend",
+      "image": "./assets/front-1.png",
+      "video": "URL_do_video_2",
+      "description": "O que faz uma desenvolvedora front-end",
+      "id": "1"
+    },
+    {
+      "title": "Árvores binárias",
+      "category": "frontend",
+      "image": "./assets/front-2.png",
+      "video": "URL_do_video_2",
+      "description": "Árvores binárias",
+      "id": "2"
+    },
+    {
+      "title": "Implementando o UX no front-end",
+      "category": "frontend",
+      "image": "./assets/front-3.png",
+      "video": "URL_do_video_3",
+      "description": "Implementando o UX no front-end",
+      "id": "3"
+    },
+    {
+      "title": "O que estudar para ser backend developer?",
+      "category": "backend",
+      "image": "./assets/back-1.png",
+      "video": "URL_do_video_4",
+      "description": "O que estudar para ser backend developer?",
+      "id": "4"
+    },
+    {
+      "title": "Github CLI - Uma nova experiência no Github",
+      "category": "backend",
+      "image": "./assets/back-2.png",
+      "video": "URL_do_video_5",
+      "description": "Github CLI - Uma nova experiência no Github",
+      "id": "5"
+    },
+    {
+      "title": "Qual a melhor linguagem de programação",
+      "category": "backend",
+      "image": "./assets/back-3.png",
+      "video": "URL_do_video_6",
+      "description": "Qual a melhor linguagem de programação",
+      "id": "6"
+    },
+    {
+      "title": "Desenvolvimento android",
+      "category": "mobile",
+      "image": "./assets/mobile-1.png",
+      "video": "URL_do_video_7",
+      "description": "Desenvolvimento android",
+      "id": "7"
+    },
+    {
+      "title": "The new React Native",
+      "category": "mobile",
+      "image": "./assets/mobile-2.png",
+      "video": "URL_do_video_8",
+      "description": "The new React Native",
+      "id": "8"
+    },
+    {
+      "title": "Hello world",
+      "category": "mobile",
+      "image": "./assets/mobile-3.png",
+      "video": "URL_do_video_9",
+      "description": "Hello world",
+      "id": "9"
+    }
+  ]
+}
